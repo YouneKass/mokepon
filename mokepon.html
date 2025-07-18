@@ -4,59 +4,85 @@
     <meta charset="utf-8" />
     <title>MOKEPON!</title>
     <script src="./js/mokepon.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
   </head>
+
   <body>
-    <!-- titulo del juego -->
-    <h1>MOKEPON! 🔥💧🌱</h1>
-    
     <!-- Section para seleccionar tu mascota -->
     <section id="seleccionar-mascota">
-      <h2>Elige tu mascota:</h2>
+      <!-- titulo del juego -->
+      <h1 class="titulo">Mokepón</h1>
 
-      <input type="radio" name="mascota" id="Hipodoge"/>
-      <label for="Hipodoge">Hipodoge</label> 
-      <br>
-      <input type="radio" name="mascota" id="Capipepo"/>
-      <label for="Capipepo">Capipepo</label> 
-      <br>
-      <input type="radio" name="mascota" id="Ratigueya"/>
-      <label for="Ratigueya">Ratigueya</label>
-      <br>
-      <input type="radio" name="mascota" id="Langistelvis"/>
-      <label for="Langistelvis">Langistelvis</label> 
-      <br>
-      <input type="radio" name="mascota" id="Tucapalma"/>
-      <label for="Tucapalma">Tucapalma</label> 
-      <br>
-      <input type="radio" name="mascota" id="Pydos"/>
-      <label for="Pydos">Pydos</label> 
-      <br>
-      <br>
+      <h2 class="subtitulo">Elige tu mascota:</h2>
+
+      <div class="tarjetas">
+        <input type="radio" name="mascota" id="Hipodoge"/>
+        <label class="tarjeta-de-mokepon" for="Hipodoge">
+          <p>Hipodoge</p>
+          <img src="img/hipodoge.png" alt="Hipodoge">
+        </label> 
+        
+        <input type="radio" name="mascota" id="Capipepo"/>
+        <label class="tarjeta-de-mokepon" for="Capipepo">
+         <p>Capipepo</p> 
+         <img src="img/capipepo.png" alt="Capipepo">
+        </label> 
+        
+        <input type="radio" name="mascota" id="Ratigueya"/>
+        <label class="tarjeta-de-mokepon" for="Ratigueya">
+          <p>Ratigueya</p>
+          <img src="img/ratigueya.png" alt="Ratigueya">
+        </label>
+        
+        <input type="radio" name="mascota" id="Langistelvis"/>
+        <label class="tarjeta-de-mokepon" for="Langistelvis">
+          <p>Langistelvis</p>
+          <img src="img/langistelvis.png" alt="Langistelvis">
+        </label> 
+        
+        <input type="radio" name="mascota" id="Tucapalma"/>
+        <label class="tarjeta-de-mokepon" for="Tucapalma">
+          <p>Tucapalma</p>
+          <img src="img/tucapalma.png" alt="Tucapalma">
+        </label> 
+        
+        <input type="radio" name="mascota" id="Pydos"/>
+        <label class="tarjeta-de-mokepon" for="Pydos">
+          <p>Pydos</p>
+          <img src="img/pydos.png" alt="Pydos">
+        </label>
+      </div>  
       <button id="boton-mascota">seleccionar</button>
     </section>
 
     <!-- Section para mostrar los ataques del jugador y del enemigo, también la cantidad de vida que tiene cada uno y cuánta se pierde en cada turno de ataque. -->
     <section id="seleccionar-Ataque">
-      <h2>Elige tu ataque:</h2>
-
-      <p>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas</p>
-      <p>La mascota <span id="mascota-enemigo"></span> del enemigo tiene <span id="vidas-enemigo">3</span> vidas</p>
+      <!-- titulo del juego -->
+      <h1 class="titulo">Mokepón</h1>
       
-      <p>
-        <button id="boton-fuego">Fuego 🔥</button>
-        <button id="boton-agua">Agua 💧</button>
-        <button id="boton-tierra">Tierra 🌱</button>
-      </p>
-    </section>
+      <h2 class="subtitulo">Elige tu ataque:</h2>
 
-    <!-- Section donde mostramos mensaje de que ataque escogimos y el ataque aleatorio enemigo -->
-    <section id="mensaje">  
-    </section>
+      <div >
+        <button id="boton-fuego" class="boton-de-ataque">Fuego 🔥</button>
+        <button id="boton-agua" class="boton-de-ataque">Agua 💧</button>
+        <button id="boton-tierra" class="boton-de-ataque">Tierra 🌱</button>
+      </div>
 
-    <!-- Poder reinicar el juego -->
-    <section id="reiniciar">
-      <button id="boton-reiniciar">Reiniciar</button>
+      <div>
+        <!-- Section donde mostramos mensaje de que ataque escogimos y el ataque aleatorio enemigo -->
+        <section id="mensaje">  
+        </section>
+
+        <!-- Poder reinicar el juego -->
+        <section id="reiniciar">
+          <button id="boton-reiniciar">Reiniciar</button>
+        </section>
+      </div>
+
+      <div>
+        <p>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas</p>
+        <p>La mascota <span id="mascota-enemigo"></span> del enemigo tiene <span id="vidas-enemigo">3</span> vidas</p> 
+      </div>
     </section>
-    
   </body>
 </html>

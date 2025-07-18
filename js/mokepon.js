@@ -7,6 +7,11 @@ let vidasEnemigo = 3;
 
 // funcion donde se crea interaciones con los botones de seleccion de mascota y ataques.
 function iniciarJuego() {
+    let sectionSeleccionarAtaque = document.getElementById('seleccionar-Ataque');
+    sectionSeleccionarAtaque.style.display = 'none';
+    let sectionReiniciar = document.getElementById('reiniciar');
+    sectionReiniciar.style.display = 'none';
+
     let botonMascotaJugador = document.getElementById('boton-mascota');
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador);
 
@@ -16,6 +21,9 @@ function iniciarJuego() {
     botonAgua.addEventListener('click', ataqueAgua);
     let botonTierrra = document.getElementById('boton-tierra');
     botonTierrra.addEventListener('click', ataqueTierra);
+    
+    let botonReiniciar = document.getElementById('boton-reiniciar');
+    botonReiniciar.addEventListener('click', reiniciarJuego);
 }
 
 // funcion donde se crea una variable aleatoria.
@@ -27,6 +35,12 @@ function aleatorio(min , max) {
 // funcion donde se escoge la mascota con la cual atacaras para luego mostrarlo en el etiqueta "span", ademas de una alerta donde te muestra que mascota escogiste y por ultimo
 // llamamos la funcion de llamar la mascota enemigo.
 function seleccionarMascotaJugador() {
+    let sectionSeleccionarMascota = document.getElementById('seleccionar-mascota');
+    sectionSeleccionarMascota.style.display = 'none';
+
+    let sectionSeleccionarAtaque = document.getElementById('seleccionar-Ataque');
+    sectionSeleccionarAtaque.style.display = 'flex';
+
     let inputHipodoge = document.getElementById('Hipodoge');
     let inputCapipepo = document.getElementById('Capipepo');
     let inputRatigueya = document.getElementById('Ratigueya');
@@ -126,7 +140,9 @@ function combate() {
 
 }
 
+// Funcion donde mandamos un mensaje al finalizar el juego de si ganamos o perdimos.
 function revisarVidas() {
+    
     if(vidasEnemigo == 0){
         crearMensajeFinal('Felicitaciones Ganaste!');
 
@@ -136,14 +152,25 @@ function revisarVidas() {
     }
 }
 
-
+// Funcion donde al momento de que uno de los dos enemigo o tu tenga vida en 0 los botones de ataque se bloqueen
+// y creacion de mensaje al momento de finalizar.
 function crearMensajeFinal(resultadoFinal) {
     let sectionMensajes = document.getElementById('mensaje');
 
     let parrafo = document.createElement('p');
-    parrafo.innerHTML = resultadoFinal
+    parrafo.innerHTML = resultadoFinal;
 
     sectionMensajes.appendChild(parrafo);
+
+    let botonFuego = document.getElementById('boton-fuego');
+    botonFuego.disabled = true;
+    let botonAgua = document.getElementById('boton-agua');
+    botonAgua.disabled = true;
+    let botonTierrra = document.getElementById('boton-tierra');
+    botonTierrra.disabled = true;
+
+    let sectionReiniciar = document.getElementById('reiniciar');
+    sectionReiniciar.style.display = 'block';
 }
 
 //En esta funcion creamos un mensaje para mostrar que ataque escogimos y el ataque aleatorio del enemigo.
@@ -152,7 +179,6 @@ function crearMensaje(resultado) {
 
     let parrafo = document.createElement('p');
     parrafo.innerHTML = 'Tu mascota Ataco con ' + ataqueJugador + ', la mascota del enemigo ataco con ' + ataqueEnemigo + ' - ' + resultado;
-
     sectionMensajes.appendChild(parrafo);
 }
 
@@ -179,6 +205,11 @@ function seleccionarMascotaEnemigo() {
     }else if (mascotaAleatorio == 6) {
         spanMascotaEnemigo.innerHTML = 'Pydos';
     }
+}
+
+// Creacion de boton reiniciar el juego.
+function reiniciarJuego() {
+    location.reload();
 }
 
 

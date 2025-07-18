@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap');
+
+body{
+    font-family: "Winky Rough", sans-serif;
+    background-color: #113F67;
+}
+
+#seleccionar-mascota{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo{
+    color: white;
+    font-size: 50px;
+}
+
+.subtitulo{
+    color: white;
+    font-size: 32px;
+}
+
+.tarjetas{
+    display: flex;
+    gap: 10px;
+}
+
+.tarjeta-de-mokepon{
+    width: 180px;
+    height: 100px;
+    background: #58A0C8;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 2px solid #FDF5AA;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta-de-mokepon img{
+    width: 80px;
+}
+
+.tarjeta-de-mokepon:hover, .boton-de-ataque:hover {
+    cursor: pointer;
+}
+
+input{
+    display: none;
+}
+
+#boton-mascota{
+    width: 150px;
+    height: 50px;
+    background: #FDF5AA;
+    border: 3px solid #58A0C8;
+    border-radius: 20px;
+    font-family: "Winky Rough", sans-serif;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+#seleccionar-Ataque{
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-de-ataque{
+    font-family: "Winky Rough", sans-serif;
+    background: #58A0C8;
+    border: 2px solid #FDF5AA;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 110px;
+    font-size: 20px;
+    margin-right: 10px;
+}
