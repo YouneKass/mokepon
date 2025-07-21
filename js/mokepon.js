@@ -41,33 +41,33 @@ function seleccionarMascotaJugador() {
     let sectionSeleccionarAtaque = document.getElementById('seleccionar-Ataque');
     sectionSeleccionarAtaque.style.display = 'flex';
 
-    let inputHipodoge = document.getElementById('Hipodoge');
-    let inputCapipepo = document.getElementById('Capipepo');
-    let inputRatigueya = document.getElementById('Ratigueya');
-    let inputLangistelvis = document.getElementById('Langistelvis');
-    let inputTucapalma = document.getElementById('Tucapalma');
-    let inputPydos = document.getElementById('Pydos');
+    let inputKyodonquaza = document.getElementById('kyodonquaza');
+    let inputPaldiatina = document.getElementById('paldiatina');
+    let inputRraichu = document.getElementById('raichu');
+    let inputVenustoizard = document.getElementById('venustoizard');
+    let inputZapmolcuno = document.getElementById('zapmolcuno');
+    let inputZekyushiram = document.getElementById('zekyushiram');
 
     let spanMascotaJugador = document.getElementById('mascota-jugador');
 
-    if (inputHipodoge.checked) {
-        spanMascotaJugador.innerHTML = 'Hipodoge';
-        // alert('Seleccionaste Hipodoge');
-    }else if(inputCapipepo.checked){
-        spanMascotaJugador.innerHTML = 'Capipepo';
-        // alert('Seleccionaste a Capipepo');
-    }else if (inputRatigueya.checked) {
-        spanMascotaJugador.innerHTML = 'Ratigueya';
-        // alert('Seleccionaste a Ratigueya');
-    }else if(inputLangistelvis.checked){
-        spanMascotaJugador.innerHTML = 'Langistelvis';
-        // alert('Seleccionaste a Langistelvis');
-    }else if(inputTucapalma.checked){
-        spanMascotaJugador.innerHTML = 'Tucapalma';
-        // alert('Seleccionaste a Tucapalma');
-    }else if(inputPydos.checked){
-        spanMascotaJugador.innerHTML = 'Pydos';
-        // alert('Seleccionaste a Pydos');
+    if (inputKyodonquaza.checked) {
+        spanMascotaJugador.innerHTML = `<img src="img/kyodonquaza.png" alt="kyodonquaza" class="imagen-mascota">kyodonquaza`;
+
+    }else if(inputPaldiatina.checked){
+        spanMascotaJugador.innerHTML = `<img src="img/paldiatina.png" alt="paldiatina" class="imagen-mascota">paldiatina`;
+
+    }else if (inputRraichu.checked) {
+        spanMascotaJugador.innerHTML = `<img src="img/raichu.png" alt="raichu" class="imagen-mascota">raichu`;
+
+    }else if(inputVenustoizard.checked){
+        spanMascotaJugador.innerHTML = `<img src="img/venustoizard.png" alt="venustoizard" class="imagen-mascota">venustoizard`;
+
+    }else if(inputZapmolcuno.checked){
+        spanMascotaJugador.innerHTML = `<img src="img/zapmolcuno.png" alt="zapmolcuno" class="imagen-mascota">zapmolcuno`;
+  
+    }else if(inputZekyushiram.checked){
+        spanMascotaJugador.innerHTML = `<img src="img/zekyushiram.png" alt="zekyushiram" class="imagen-mascota">zekyushiram`;
+       
     }else{
         alert('No seleccionaste nada');
     }
@@ -152,15 +152,31 @@ function revisarVidas() {
     }
 }
 
+//En esta funcion creamos un mensaje para mostrar que ataque escogimos y el ataque aleatorio del enemigo.
+function crearMensaje(resultado) {
+    let sectionMensajes = document.getElementById('resultado');
+    let ataquesDelJugador = document.getElementById('ataques-del-jugador');
+    let ataquesDelEnemigo = document.getElementById('ataques-del-enemigo');
+
+        
+    let nuevoAtaqueDelJugador = document.createElement('p');
+    let nuevoAtaqueDelEnemigo = document.createElement('p');
+
+    sectionMensajes.innerHTML = resultado;
+    nuevoAtaqueDelJugador.innerHTML = ataqueJugador;
+    nuevoAtaqueDelEnemigo.innerHTML= ataqueEnemigo;
+
+   
+    ataquesDelJugador.appendChild(nuevoAtaqueDelJugador);
+    ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo);
+}
+
 // Funcion donde al momento de que uno de los dos enemigo o tu tenga vida en 0 los botones de ataque se bloqueen
-// y creacion de mensaje al momento de finalizar.
+// y creacion de mensaje al momento de finalizar y mostramos el boton de reiniciar
 function crearMensajeFinal(resultadoFinal) {
-    let sectionMensajes = document.getElementById('mensaje');
+    let sectionMensajes = document.getElementById('resultado');
 
-    let parrafo = document.createElement('p');
-    parrafo.innerHTML = resultadoFinal;
-
-    sectionMensajes.appendChild(parrafo);
+    sectionMensajes.innerHTML = resultadoFinal;
 
     let botonFuego = document.getElementById('boton-fuego');
     botonFuego.disabled = true;
@@ -173,37 +189,28 @@ function crearMensajeFinal(resultadoFinal) {
     sectionReiniciar.style.display = 'block';
 }
 
-//En esta funcion creamos un mensaje para mostrar que ataque escogimos y el ataque aleatorio del enemigo.
-function crearMensaje(resultado) {
-    let sectionMensajes = document.getElementById('mensaje');
-
-    let parrafo = document.createElement('p');
-    parrafo.innerHTML = 'Tu mascota Ataco con ' + ataqueJugador + ', la mascota del enemigo ataco con ' + ataqueEnemigo + ' - ' + resultado;
-    sectionMensajes.appendChild(parrafo);
-}
-
 //Creamos una funcion para poder llamar la mascota enemiga pero de forma aleatoria y poder mostrarla en el HTML.
 function seleccionarMascotaEnemigo() {
     let mascotaAleatorio = aleatorio(1,6);
     let spanMascotaEnemigo = document.getElementById('mascota-enemigo');
 
     if (mascotaAleatorio == 1) {
-        spanMascotaEnemigo.innerHTML = 'Hipodoge';
+        spanMascotaEnemigo.innerHTML = `<img src="img/kyodonquaza.png" alt="kyodonquaza" class="imagen-mascota">kyodonquaza`;
 
     }else if (mascotaAleatorio == 2) {
-        spanMascotaEnemigo.innerHTML = 'Capipepo';
+        spanMascotaEnemigo.innerHTML = `<img src="img/paldiatina.png" alt="paldiatina" class="imagen-mascota">paldiatina`;
 
     }else if(mascotaAleatorio == 3){
-        spanMascotaEnemigo.innerHTML = 'Ratigueya';
+        spanMascotaEnemigo.innerHTML = `<img src="img/raichu.png" alt="raichu" class="imagen-mascota">raichu`;
 
     }else if (mascotaAleatorio == 4) {
-        spanMascotaEnemigo.innerHTML = 'Langistelvis';
+        spanMascotaEnemigo.innerHTML = `<img src="img/venustoizard.png" alt="venustoizard" class="imagen-mascota">venustoizard`;
 
     }else if (mascotaAleatorio == 5) {
-        spanMascotaEnemigo.innerHTML = 'Tucapalma';
+        spanMascotaEnemigo.innerHTML = `<img src="img/zapmolcuno.png" alt="zapmolcuno" class="imagen-mascota">zapmolcuno`;
 
     }else if (mascotaAleatorio == 6) {
-        spanMascotaEnemigo.innerHTML = 'Pydos';
+        spanMascotaEnemigo.innerHTML = `<img src="img/zekyushiram.png" alt="zekyushiram" class="imagen-mascota">zekyushiram`;
     }
 }
 
