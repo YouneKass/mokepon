@@ -25,6 +25,8 @@ body{
 .tarjetas, .tarjeta-ataque{
     display: flex;
     gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .tarjeta-de-mokepon{
