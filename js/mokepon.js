@@ -1,97 +1,184 @@
 // creaciones de variables globales.
+const sectionSeleccionarAtaque = document.getElementById('seleccionar-Ataque');
+
+const sectionReiniciar = document.getElementById('reiniciar');
+
+const botonMascotaJugador = document.getElementById('boton-mascota');
+
+const botonFuego = document.getElementById('boton-fuego');
+const botonAgua = document.getElementById('boton-agua');
+const botonTierrra = document.getElementById('boton-tierra');
+const botonReiniciar = document.getElementById('boton-reiniciar');
+
+const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota');
+
+
+
+const spanMascotaJugador = document.getElementById('mascota-jugador');
+const spanMascotaEnemigo = document.getElementById('mascota-enemigo');
+
+const spanVidaJugador = document.getElementById('vidas-jugador');
+const spanVidaEnemigo = document.getElementById('vidas-enemigo');
+
+const sectionMensajes = document.getElementById('resultado');
+const ataquesDelJugador = document.getElementById('ataques-del-jugador');
+const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo');
+const contenedorTarjetas =document.getElementById('contenedorTarjetas');
+
+let mokepones = [];
 let ataqueJugador;
 let ataqueEnemigo;
+let opcionesDeMokepones;
+let inputKyodonquaza;
+let inputPaldiatina;
+let inputRraichu;
+let inputVenustoizard;
+let inputZapmolcuno;
+let inputZekyushiram;
 let vidasJugador = 3;
 let vidasEnemigo = 3;
 
+class Mokepon {
+    constructor(nombre, foto, vida){
+        this.nombre = nombre;
+        this.foto = foto;
+        this.vida = vida;
+        this.ataques = []
+    }
+}
+
+let kyodonquaza = new Mokepon('Kyodonquaza', 'img/kyodonquaza.png', 5);
+let paldiatina = new Mokepon('Paldiatina', 'img/paldiatina.png', 5);
+let raichu = new Mokepon('Raichu', 'img/raichu.png', 2); 
+let venustoizard = new Mokepon('Venustoizard', 'img/venustoizard.png', 4); 
+let zapmolcuno = new Mokepon('Zapmolcuno', 'img/zapmolcuno.png', 3); 
+let zekyushiram = new Mokepon('Zekyushiram', 'img/zekyushiram.png', 5); 
+
+kyodonquaza.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌪️', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' }
+);
+
+paldiatina.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🩻', id: 'boton-fuego' },
+    { nombre: '🪨', id: 'boton-tierra' },
+    { nombre: '⭐', id: 'boton-tierra' },
+);
+
+raichu.ataques.push(
+    { nombre: '🪨', id: 'boton-agua' },
+    { nombre: '⚡', id: 'boton-fuego' }
+);
+
+venustoizard.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' },
+);
+
+zapmolcuno.ataques.push(
+    { nombre: '❄️', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '⚡', id: 'boton-tierra' },
+    { nombre: '🌪️', id: 'boton-agua' },
+);
+
+zekyushiram.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '⚡', id: 'boton-fuego' },
+    { nombre: '❄️', id: 'boton-tierra' },
+    { nombre: '⭐', id: 'boton-tierra' },
+);
+
+mokepones.push(kyodonquaza, paldiatina, raichu, venustoizard, zapmolcuno, zekyushiram);
 
 // funcion donde se crea interaciones con los botones de seleccion de mascota y ataques.
-function iniciarJuego() {
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar-Ataque');
+function iniciarJuego() {   
     sectionSeleccionarAtaque.style.display = 'none';
-    let sectionReiniciar = document.getElementById('reiniciar');
-    sectionReiniciar.style.display = 'none';
 
-    let botonMascotaJugador = document.getElementById('boton-mascota');
+    mokepones.forEach((mokepon) =>{
+        opcionesDeMokepones = `
+            <input type="radio" name="mascota" id="${mokepon.nombre}"/>
+            <label class="tarjeta-de-mokepon" for="${mokepon.nombre}">
+            <p>"${mokepon.nombre}"</p>
+            <img src="${mokepon.foto}" alt="${mokepon.nombre}">
+            </label>
+        `
+        contenedorTarjetas.innerHTML += opcionesDeMokepones;
+
+        inputKyodonquaza = document.getElementById('Kyodonquaza');
+        inputPaldiatina = document.getElementById('Paldiatina');
+        inputRraichu = document.getElementById('Raichu');
+        inputVenustoizard = document.getElementById('Venustoizard');
+        inputZapmolcuno = document.getElementById('Zapmolcuno');
+        inputZekyushiram = document.getElementById('Zekyushiram');
+    })
+
+    sectionReiniciar.style.display = 'none';
+  
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador);
 
-    let botonFuego = document.getElementById('boton-fuego');
     botonFuego.addEventListener('click', ataqueFuego);
-    let botonAgua = document.getElementById('boton-agua');
+
     botonAgua.addEventListener('click', ataqueAgua);
-    let botonTierrra = document.getElementById('boton-tierra');
-    botonTierrra.addEventListener('click', ataqueTierra);
     
-    let botonReiniciar = document.getElementById('boton-reiniciar');
+    botonTierrra.addEventListener('click', ataqueTierra);
+     
     botonReiniciar.addEventListener('click', reiniciarJuego);
 }
-
-// funcion donde se crea una variable aleatoria.
-function aleatorio(min , max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 
 // funcion donde se escoge la mascota con la cual atacaras para luego mostrarlo en el etiqueta "span", ademas de una alerta donde te muestra que mascota escogiste y por ultimo
 // llamamos la funcion de llamar la mascota enemigo.
 function seleccionarMascotaJugador() {
-    let sectionSeleccionarMascota = document.getElementById('seleccionar-mascota');
     sectionSeleccionarMascota.style.display = 'none';
-
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar-Ataque');
+ 
     sectionSeleccionarAtaque.style.display = 'flex';
 
-    let inputKyodonquaza = document.getElementById('kyodonquaza');
-    let inputPaldiatina = document.getElementById('paldiatina');
-    let inputRraichu = document.getElementById('raichu');
-    let inputVenustoizard = document.getElementById('venustoizard');
-    let inputZapmolcuno = document.getElementById('zapmolcuno');
-    let inputZekyushiram = document.getElementById('zekyushiram');
-
-    let spanMascotaJugador = document.getElementById('mascota-jugador');
-
-    if (inputKyodonquaza.checked) {
-        spanMascotaJugador.innerHTML = `<img src="img/kyodonquaza.png" alt="kyodonquaza" class="imagen-mascota">kyodonquaza`;
-
-    }else if(inputPaldiatina.checked){
-        spanMascotaJugador.innerHTML = `<img src="img/paldiatina.png" alt="paldiatina" class="imagen-mascota">paldiatina`;
-
-    }else if (inputRraichu.checked) {
-        spanMascotaJugador.innerHTML = `<img src="img/raichu.png" alt="raichu" class="imagen-mascota">raichu`;
-
-    }else if(inputVenustoizard.checked){
-        spanMascotaJugador.innerHTML = `<img src="img/venustoizard.png" alt="venustoizard" class="imagen-mascota">venustoizard`;
-
-    }else if(inputZapmolcuno.checked){
-        spanMascotaJugador.innerHTML = `<img src="img/zapmolcuno.png" alt="zapmolcuno" class="imagen-mascota">zapmolcuno`;
-  
-    }else if(inputZekyushiram.checked){
-        spanMascotaJugador.innerHTML = `<img src="img/zekyushiram.png" alt="zekyushiram" class="imagen-mascota">zekyushiram`;
-       
-    }else{
-        alert('No seleccionaste nada');
+    const inputSeleccionado = document.querySelector('input[name="mascota"]:checked');
+    if (inputSeleccionado) {
+        const nombreMascota = inputSeleccionado.id;
+        const mascota = mokepones.find(mokepon => mokepon.nombre === nombreMascota);
+        spanMascotaJugador.innerHTML = `<img src="${mascota.foto}" alt="${mascota.nombre}" class="imagen-mascota">${mascota.nombre}`;  
+    }else {
+        alert("Selecciona una mascota primero.");
+        sectionSeleccionarMascota.style.display = 'flex';
+        sectionSeleccionarAtaque.style.display = 'none';
+        return;
     }
-
     seleccionarMascotaEnemigo();
+}
 
+//Creamos una funcion para poder llamar la mascota enemiga pero de forma aleatoria y poder mostrarla en el HTML.
+function seleccionarMascotaEnemigo() {
+    let mascotaAleatorio = aleatorio(0, mokepones.length - 1);
+    const mascota = mokepones[mascotaAleatorio];
+
+    spanMascotaEnemigo.innerHTML = `<img src="${mascota.foto}" alt="${mascota.nombre}" class="imagen-mascota">${mascota.nombre}`;  
 }
 
 //funcion donde se crea ataque fuego y ademas invocamos ataque aleatorio enemigo.
 function ataqueFuego() {
     ataqueJugador = 'Fuego';
-     ataqueAleatorioEnemigo();
+    ataqueAleatorioEnemigo();
 }
 
 //funcion donde se crea ataque agua y ademas invocamos ataque aleatorio enemigo.
 function ataqueAgua() {
     ataqueJugador = 'Agua';
-     ataqueAleatorioEnemigo();
+    ataqueAleatorioEnemigo();
 }
 
 //funcion donde se crea ataque tierra y ademas invocamos ataque aleatorio enemigo.
 function ataqueTierra() {
     ataqueJugador = 'Tierra';
     ataqueAleatorioEnemigo();
+}
+
+// funcion donde se crea una variable aleatoria.
+function aleatorio(min , max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 //Creamos una funcion para hacer el ataque enemigo aleatorio, ademas llamamos la funcion aleatorio.
@@ -112,9 +199,6 @@ function ataqueAleatorioEnemigo(){
 
 //creamos una desicion para poder saber si ganamos, perdimos o empatamos con el enemigo.
 function combate() {
-    let spanVidaJugador = document.getElementById('vidas-jugador');
-    let spanVidaEnemigo = document.getElementById('vidas-enemigo');
-
      if(ataqueEnemigo == ataqueJugador) {
         crearMensaje("EMPATE");
     } else if(ataqueJugador == 'Fuego' && ataqueEnemigo == 'Tierra') {
@@ -142,7 +226,6 @@ function combate() {
 
 // Funcion donde mandamos un mensaje al finalizar el juego de si ganamos o perdimos.
 function revisarVidas() {
-    
     if(vidasEnemigo == 0){
         crearMensajeFinal('Felicitaciones Ganaste!');
 
@@ -154,11 +237,6 @@ function revisarVidas() {
 
 //En esta funcion creamos un mensaje para mostrar que ataque escogimos y el ataque aleatorio del enemigo.
 function crearMensaje(resultado) {
-    let sectionMensajes = document.getElementById('resultado');
-    let ataquesDelJugador = document.getElementById('ataques-del-jugador');
-    let ataquesDelEnemigo = document.getElementById('ataques-del-enemigo');
-
-        
     let nuevoAtaqueDelJugador = document.createElement('p');
     let nuevoAtaqueDelEnemigo = document.createElement('p');
 
@@ -174,44 +252,16 @@ function crearMensaje(resultado) {
 // Funcion donde al momento de que uno de los dos enemigo o tu tenga vida en 0 los botones de ataque se bloqueen
 // y creacion de mensaje al momento de finalizar y mostramos el boton de reiniciar
 function crearMensajeFinal(resultadoFinal) {
-    let sectionMensajes = document.getElementById('resultado');
-
     sectionMensajes.innerHTML = resultadoFinal;
 
-    let botonFuego = document.getElementById('boton-fuego');
     botonFuego.disabled = true;
-    let botonAgua = document.getElementById('boton-agua');
+    
     botonAgua.disabled = true;
-    let botonTierrra = document.getElementById('boton-tierra');
+    
     botonTierrra.disabled = true;
 
-    let sectionReiniciar = document.getElementById('reiniciar');
+    
     sectionReiniciar.style.display = 'block';
-}
-
-//Creamos una funcion para poder llamar la mascota enemiga pero de forma aleatoria y poder mostrarla en el HTML.
-function seleccionarMascotaEnemigo() {
-    let mascotaAleatorio = aleatorio(1,6);
-    let spanMascotaEnemigo = document.getElementById('mascota-enemigo');
-
-    if (mascotaAleatorio == 1) {
-        spanMascotaEnemigo.innerHTML = `<img src="img/kyodonquaza.png" alt="kyodonquaza" class="imagen-mascota">kyodonquaza`;
-
-    }else if (mascotaAleatorio == 2) {
-        spanMascotaEnemigo.innerHTML = `<img src="img/paldiatina.png" alt="paldiatina" class="imagen-mascota">paldiatina`;
-
-    }else if(mascotaAleatorio == 3){
-        spanMascotaEnemigo.innerHTML = `<img src="img/raichu.png" alt="raichu" class="imagen-mascota">raichu`;
-
-    }else if (mascotaAleatorio == 4) {
-        spanMascotaEnemigo.innerHTML = `<img src="img/venustoizard.png" alt="venustoizard" class="imagen-mascota">venustoizard`;
-
-    }else if (mascotaAleatorio == 5) {
-        spanMascotaEnemigo.innerHTML = `<img src="img/zapmolcuno.png" alt="zapmolcuno" class="imagen-mascota">zapmolcuno`;
-
-    }else if (mascotaAleatorio == 6) {
-        spanMascotaEnemigo.innerHTML = `<img src="img/zekyushiram.png" alt="zekyushiram" class="imagen-mascota">zekyushiram`;
-    }
 }
 
 // Creacion de boton reiniciar el juego.

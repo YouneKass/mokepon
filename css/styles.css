@@ -111,7 +111,7 @@ input:checked + label{
     margin-top: 20px;
     display: grid;
     grid-template-columns: 300px 300px 300px 300px;
-    align-items: center;
+    align-items: start;
     gap: 20px;
 }
 
@@ -128,7 +128,9 @@ input:checked + label{
     border-radius: 20px;
     padding: 15px;
     font-size: 30px;
+    margin-top: 20px;
 }
+
 .ataques-jugador, .ataques-enemigo{
     display: flex;
     flex-direction: column;
@@ -137,6 +139,7 @@ input:checked + label{
     justify-content: center;
     background: #113F67;
     border-radius: 20px;
+    margin-top: 20px;
 }
 
 @media (max-width: 768px){

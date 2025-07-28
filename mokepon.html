@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOKEPON!</title>
-    <script src="./js/mokepon.js"></script>
     <link rel="stylesheet" href="css/styles.css">
   </head>
 
@@ -16,42 +15,8 @@
 
       <h2 class="subtitulo">Elige tu mascota:</h2>
 
-      <div class="tarjetas">
-        <input type="radio" name="mascota" id="kyodonquaza"/>
-        <label class="tarjeta-de-mokepon" for="kyodonquaza">
-          <p>kyodonquaza</p>
-          <img src="img/kyodonquaza.png" alt="kyodonquaza">
-        </label> 
+      <div id="contenedorTarjetas" class="tarjetas">
         
-        <input type="radio" name="mascota" id="paldiatina"/>
-        <label class="tarjeta-de-mokepon" for="paldiatina">
-         <p>paldiatina</p> 
-         <img src="img/paldiatina.png" alt="paldiatina">
-        </label> 
-        
-        <input type="radio" name="mascota" id="raichu"/>
-        <label class="tarjeta-de-mokepon" for="raichu">
-          <p>raichu</p>
-          <img src="img/raichu.png" alt="raichu">
-        </label>
-        
-        <input type="radio" name="mascota" id="venustoizard"/>
-        <label class="tarjeta-de-mokepon" for="venustoizard">
-          <p>venustoizard</p>
-          <img src="img/venustoizard.png" alt="venustoizard">
-        </label> 
-        
-        <input type="radio" name="mascota" id="zapmolcuno"/>
-        <label class="tarjeta-de-mokepon" for="zapmolcuno">
-          <p>zapmolcuno</p>
-          <img src="img/zapmolcuno.png" alt="zapmolcuno">
-        </label> 
-        
-        <input type="radio" name="mascota" id="zekyushiram"/>
-        <label class="tarjeta-de-mokepon" for="zekyushiram">
-          <p>zekyushiram</p>
-          <img src="img/zekyushiram.png" alt="zekyushiram">
-        </label>
       </div>  
       <button id="boton-mascota">seleccionar</button>
     </section>
@@ -95,5 +60,6 @@
         <p id="mascota-enemigo" class="mascotas"></p>
       </div>
     </section>
+    <script src="./js/mokepon.js"></script>
   </body>
 </html>
