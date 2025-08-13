@@ -24,15 +24,15 @@ const contenedorTarjetas = document.getElementById('contenedorTarjetas');
 const contenedorAtaques = document.getElementById('contenedorAtaques');
 
 const reglas = {
-    FUEGO:     ["VIENTO", "ELECTRICO", "ESTELAR", "HIELO"],
-    AGUA:      ["FUEGO", "ESTELAR", "METAL"],
-    TIERRA:    ["AGUA", "METAL", "ELECTRICO", "FUEGO"],
+    FUEGO:     ["TIERRA", "VIENTO", "ELECTRICO", "ESTELAR"],
+    AGUA:      ["FUEGO", "ESTELAR", "ELECTRICO"],
+    TIERRA:    ["AGUA", "METAL", "ELECTRICO"],
     VIENTO:    ["TIERRA", "ESTELAR", "HIELO", "FANTASMA"],
-    METAL:     ["FUEGO", "ELECTRICO", "VIENTO", "HIELO"],
-    ELECTRICO: ["VIENTO", "ESTELAR", "AGUA"],
-    ESTELAR:   ["TIERRA", "FANTASMA", "METAL", "ELECTRICO"],
-    HIELO:     ["AGUA", "TIERRA", "ESTELAR", "ELECTRICO"],
-    FANTASMA:  ["FUEGO", "AGUA", "TIERRA", "ELECTRICO", "HIELO", "METAL", "ESTELAR"]
+    METAL:     ["AGUA", "FUEGO", "ELECTRICO", "VIENTO"],
+    ELECTRICO: ["VIENTO", "ESTELAR"],
+    ESTELAR:   ["AGUA", "TIERRA", "FANTASMA", "METAL"],
+    HIELO:     ["AGUA", "TIERRA", "ESTELAR"],
+    FANTASMA:  ["FUEGO", "AGUA", "TIERRA", "ELECTRICO", "HIELO", "METAL"]
 };
 
 let mokepones = [];
@@ -159,9 +159,11 @@ function seleccionarMascotaJugador() {
     const inputSeleccionado = document.querySelector('input[name="mascota"]:checked');
     if (inputSeleccionado) {
         const nombreMascota = inputSeleccionado.id;
-        mascotaJugador = inputSeleccionado.id;
+        mascotaJugador = nombreMascota;
         const mascota = mokepones.find(mokepon => mokepon.nombre === nombreMascota);
+
         spanMascotaJugador.innerHTML = `<img src="${mascota.foto}" alt="${mascota.nombre}" class="imagen-mascota">${mascota.nombre}`;  
+
         vidasJugadorActual = mascota.vida;
         vidasJugador.textContent = vidasJugadorActual;
     }else {
@@ -207,43 +209,31 @@ function mostrarAtaques(ataques) {
 function secuenciaAtaque() {
     botones.forEach((boton) => {
         boton.addEventListener('click', (e) => {
+            let ataqueSeleccionado;
             if (e.target.textContent === '🔥') {
-                ataqueJugador.push('FUEGO');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else if (e.target.textContent === '💧') {
-                ataqueJugador.push('AGUA');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else if(e.target.textContent === '🌱'){
-                ataqueJugador.push('TIERRA');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else if(e.target.textContent === '🩻'){
-                ataqueJugador.push('FANTASMA');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else if(e.target.textContent === '🪨'){
-                ataqueJugador.push('METAL');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else if(e.target.textContent === '⭐'){
-                ataqueJugador.push('ESTELAR');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else if(e.target.textContent === '⚡'){
-                ataqueJugador.push('ELECTRICO');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else if(e.target.textContent === '❄️'){
-                ataqueJugador.push('HIELO');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
-            }else{
-                ataqueJugador.push('VIENTO');
-                console.log(ataqueJugador);
-                boton.style.background = '#34699A'
+                ataqueSeleccionado = 'FUEGO';
+            } else if (e.target.textContent === '💧') {
+                ataqueSeleccionado = 'AGUA';
+            } else if (e.target.textContent === '🌱') {
+                ataqueSeleccionado = 'TIERRA';
+            } else if (e.target.textContent === '🩻') {
+                ataqueSeleccionado = 'FANTASMA';
+            } else if (e.target.textContent === '🪨') {
+                ataqueSeleccionado = 'METAL';
+            } else if (e.target.textContent === '⭐') {
+                ataqueSeleccionado = 'ESTELAR';
+            } else if (e.target.textContent === '⚡') {
+                ataqueSeleccionado = 'ELECTRICO';
+            } else if (e.target.textContent === '❄️') {
+                ataqueSeleccionado = 'HIELO';
+            } else {
+                ataqueSeleccionado = 'VIENTO';
             }
+
+            ataqueJugador.push(ataqueSeleccionado);
+            console.log(ataqueJugador);
+
+            indexAtaqueJugador = ataqueSeleccionado;
             ataqueAleatorioEnemigo();
         })
     })
@@ -254,37 +244,41 @@ function seleccionarMascotaEnemigo() {
     let mascotaAleatorio = aleatorio(0, mokepones.length - 1);
     const mascota = mokepones[mascotaAleatorio];
 
+    // Mostrar nombre e imagen
     spanMascotaEnemigo.innerHTML = `<img src="${mascota.foto}" alt="${mascota.nombre}" class="imagen-mascota">${mascota.nombre}`;
+
+    // Guardar vidas y ataques
     vidasEnemigoActual = mascota.vida;
     vidasEnemigo.textContent = vidasEnemigoActual;
-    ataquesMokeponEnemigo = mascota.ataques;
+
+    ataquesMokeponEnemigo = mascota.ataques;// lista de ataques de su mascota
     secuenciaAtaque();
 }
 
 //Creamos una funcion para hacer el ataque enemigo aleatorio, ademas llamamos la funcion aleatorio.
 // llamos la funcion de combate para poder mostrar si ganamos o perdimos en el HTML.
 function ataqueAleatorioEnemigo(){
-    let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length -1);
-    if (ataqueAleatorio == 0) {
-        ataqueEnemigo.push('FUEGO');
-    }else if (ataqueAleatorio == 1) {
-        ataqueEnemigo.push('AGUA');
-    }else if (ataqueAleatorio == 2){
-        ataqueEnemigo.push('TIERRA');
-    }else if (ataqueAleatorio == 3){
-        ataqueEnemigo.push('VIENTO');
-    }else if (ataqueAleatorio == 4){
-        ataqueEnemigo.push('METAL');
-    }else if (ataqueAleatorio == 5){
-        ataqueEnemigo.push('ELECTRICO');
-    }else if (ataqueAleatorio == 6){
-        ataqueEnemigo.push('ESTELAR');
-    }else if (ataqueAleatorio == 7){
-        ataqueEnemigo.push('HIELO');
-    }else {
-        ataqueEnemigo.push('FANTASMA');
+    // Elegir un ataque aleatorio del arreglo de ataques de la mascota enemiga
+    let ataqueSeleccionado = ataquesMokeponEnemigo[aleatorio(0, ataquesMokeponEnemigo.length - 1)];
+
+    let tipoAtaque;
+    switch (ataqueSeleccionado.nombre) {
+        case '🔥': tipoAtaque = 'FUEGO'; break;
+        case '💧': tipoAtaque = 'AGUA'; break;
+        case '🌱': tipoAtaque = 'TIERRA'; break;
+        case '🌪️': tipoAtaque = 'VIENTO'; break;
+        case '🪨': tipoAtaque = 'METAL'; break;
+        case '⚡': tipoAtaque = 'ELECTRICO'; break;
+        case '⭐': tipoAtaque = 'ESTELAR'; break;
+        case '❄️': tipoAtaque = 'HIELO'; break;
+        case '🩻': tipoAtaque = 'FANTASMA'; break;
     }
+    ataqueEnemigo.push(tipoAtaque);
     console.log(ataqueEnemigo);
+
+    // También actualizamos el índice para mostrar el ataque en pantalla
+    indexAtaqueEnemigo = tipoAtaque;
+
     iniciarPelea();
 }
 
@@ -303,23 +297,20 @@ function indexAmbosOponentes(jugador, enemigo) {
 
 //creamos una desicion para poder saber si ganamos, perdimos o empatamos con el enemigo.
 function combate() {
-    for (let i = 0; i < ataqueJugador.length; i++) {
-        if (vidasJugadorActual <= 0 || vidasEnemigoActual <= 0) break;
+    const jugador = ataqueJugador[ataqueJugador.length - 1]; // último ataque
+    const enemigo = ataqueEnemigo[ataqueEnemigo.length - 1]; // último ataque
 
-        indexAmbosOponentes(i, i);
-
-        if (ataqueJugador[i] === ataqueEnemigo[i]) {
+        if (jugador === enemigo) {
             crearMensaje("EMPATE");
-        }else if (reglas[ataqueJugador[i]] && reglas[ataqueJugador[i]].includes(ataqueEnemigo[i])) {
+        }else if (reglas[jugador] && reglas[jugador].includes(enemigo)) {
             crearMensaje("GANASTE");
             vidasEnemigoActual--;
             vidasEnemigo.textContent = vidasEnemigoActual;
-        } else {
+        }else {
             crearMensaje("PERDISTE");
             vidasJugadorActual--;
             vidasJugador.textContent = vidasJugadorActual;
         }
-    }
     // Revisar las vidas
     revisarVidas();
 }
@@ -335,14 +326,16 @@ function revisarVidas() {
 
 //En esta funcion creamos un mensaje para mostrar que ataque escogimos y el ataque aleatorio del enemigo.
 function crearMensaje(resultado) {
-    let nuevoAtaqueDelJugador = document.createElement('p');
-    let nuevoAtaqueDelEnemigo = document.createElement('p');
-
     sectionMensajes.innerHTML = resultado;
-    nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador;
-    nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo;
 
-    ataquesDelJugador.appendChild(nuevoAtaqueDelJugador);
+    let nuevoAtaqueDelJugador = document.createElement('p');
+    nuevoAtaqueDelJugador.textContent = indexAtaqueJugador;  // Ataque actual
+    ataquesDelJugador.innerHTML = '';  // Limpiar contenido previo
+    ataquesDelJugador.appendChild(nuevoAtaqueDelJugador);   // Agregar solo el ataque actual
+
+    let nuevoAtaqueDelEnemigo = document.createElement('p');
+    nuevoAtaqueDelEnemigo.textContent = indexAtaqueEnemigo;
+    ataquesDelEnemigo.innerHTML = '';  // Limpiar contenido previo
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo);
 }
 
@@ -350,16 +343,6 @@ function crearMensaje(resultado) {
 // y creacion de mensaje al momento de finalizar y mostramos el boton de reiniciar
 function crearMensajeFinal(resultadoFinal) {
     sectionMensajes.innerHTML = resultadoFinal;
-
-    botonFuego.disabled = true;
-    botonAgua.disabled = true;
-    botonTierra.disabled = true;
-    botonElectrico.disabled = true;
-    botonEstelar.disabled = true;
-    botonFantasma.disabled = true;
-    botonHielo.disabled = true;
-    botonMetal.disabled = true;
-    botonViento.disabled = true;
 
     sectionReiniciar.style.display = 'block';
 }
