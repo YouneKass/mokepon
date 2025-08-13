@@ -9,7 +9,7 @@ const botonReiniciar = document.getElementById('boton-reiniciar');
 
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota');
 
-
+const botonVolver = document.getElementById('boton-volver');
 
 const spanMascotaJugador = document.getElementById('mascota-jugador');
 const spanMascotaEnemigo = document.getElementById('mascota-enemigo');
@@ -147,6 +147,8 @@ function iniciarJuego() {
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador);
 
     botonReiniciar.addEventListener('click', reiniciarJuego);
+
+    botonVolver.addEventListener('click', volverASeleccionarMascota);
 }
 
 // funcion donde se escoge la mascota con la cual atacaras para luego mostrarlo en el etiqueta "span", ademas de una alerta donde te muestra que mascota escogiste y por ultimo
@@ -355,6 +357,19 @@ function reiniciarJuego() {
 // funcion donde se crea una variable aleatoria.
 function aleatorio(min , max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function volverASeleccionarMascota() {
+    // Oculta la sección de ataques
+    sectionSeleccionarAtaque.style.display = 'none';
+
+    contenedorAtaques.innerHTML = '';
+    ataquesDelJugador.innerHTML = '';
+    ataquesDelEnemigo.innerHTML = '';
+    sectionMensajes.innerHTML = 'Mucha Suerte!!';
+
+    // Muestra la sección de selección de mascota
+    sectionSeleccionarMascota.style.display = 'flex';
 }
 
 // Ejecuta iniciarJuego() cuando la página termine de cargar por completo.
