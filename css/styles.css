@@ -153,4 +153,20 @@ input:checked + label{
         flex-direction: column;
         align-items: stretch;
     }
+    .titulo{
+        margin-top: 65px;
+    }
+}
+
+.volver{
+    font-family: "Winky Rough", sans-serif;
+    background: #58A0C8;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 2px solid #FDF5AA;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
 }
