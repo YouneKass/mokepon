@@ -70,17 +70,29 @@ let lienzo = mapa.getContext("2d");
 let intervalo;
 let mapaBackground = new Image();
 mapaBackground.src = './img/background-battle.gif';
+let alturaMapa;
+let anchoMapa = window.innerWidth - 20;
+const anchoMaximoDelMapa = 800;
+
+if (anchoMapa > anchoMaximoDelMapa) {
+    anchoMapa = anchoMaximoDelMapa - 20;
+}
+
+alturaMapa = anchoMapa * 500 / 800;
+
+mapa.width = anchoMapa;
+mapa.height = alturaMapa;
 
 class Mokepon {
-    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10){
+    constructor(nombre, foto, vida, fotoMapa){
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
         this.ataques = [];
-        this.x = x;
-        this.y = y;
         this.ancho = 80;
         this.alto = 80;
+        this.x = aleatorio(0, mapa.width - this.ancho);
+        this.y = aleatorio(0, mapa.height - this.alto);;
         this.mapaFoto = new Image();
         this.mapaFoto.src = fotoMapa;
         this.velocidadX = 0;
@@ -105,12 +117,12 @@ let venustoizard = new Mokepon('Venustoizard', 'img/venustoizard.png', 4, 'img/v
 let zapmolcuno = new Mokepon('Zapmolcuno', 'img/zapmolcuno.png', 3, 'img/zapmolcunoCara.png'); 
 let zekyushiram = new Mokepon('Zekyushiram', 'img/zekyushiram.png', 5, 'img/zekyushiramCara.png'); 
 
-let kyodonquazaEnemigo = new Mokepon('Kyodonquaza', 'img/kyodonquaza.png', 5, 'img/kyodonquazaCara.png', 80, 350);
-let paldiatinaEnemigo = new Mokepon('Paldiatina', 'img/paldiatina.png', 5, 'img/paldiatinaCara.png', 150, 130);
-let raichuEnemigo = new Mokepon('Raichu', 'img/raichu.png', 3, 'img/raichuCara.png', 300, 190); 
-let venustoizardEnemigo = new Mokepon('Venustoizard', 'img/venustoizard.png', 4, 'img/venustoizardCara.png', 700, 50); 
-let zapmolcunoEnemigo = new Mokepon('Zapmolcuno', 'img/zapmolcuno.png', 3, 'img/zapmolcunoCara.png', 400, 300); 
-let zekyushiramEnemigo = new Mokepon('Zekyushiram', 'img/zekyushiram.png', 5, 'img/zekyushiramCara.png', 600, 400); 
+let kyodonquazaEnemigo = new Mokepon('Kyodonquaza', 'img/kyodonquaza.png', 5, 'img/kyodonquazaCara.png');
+let paldiatinaEnemigo = new Mokepon('Paldiatina', 'img/paldiatina.png', 5, 'img/paldiatinaCara.png');
+let raichuEnemigo = new Mokepon('Raichu', 'img/raichu.png', 3, 'img/raichuCara.png'); 
+let venustoizardEnemigo = new Mokepon('Venustoizard', 'img/venustoizard.png', 4, 'img/venustoizardCara.png'); 
+let zapmolcunoEnemigo = new Mokepon('Zapmolcuno', 'img/zapmolcuno.png', 3, 'img/zapmolcunoCara.png'); 
+let zekyushiramEnemigo = new Mokepon('Zekyushiram', 'img/zekyushiram.png', 5, 'img/zekyushiramCara.png'); 
 
 kyodonquaza.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
@@ -151,7 +163,17 @@ zekyushiram.ataques.push(
     { nombre: '⭐', id: 'boton-estelar' }
 );
 
+// Asignar ataques a cada enemigo
+kyodonquazaEnemigo.ataques = kyodonquaza.ataques.slice();
+paldiatinaEnemigo.ataques = paldiatina.ataques.slice();
+raichuEnemigo.ataques = raichu.ataques.slice();
+venustoizardEnemigo.ataques = venustoizard.ataques.slice();
+zapmolcunoEnemigo.ataques = zapmolcuno.ataques.slice();
+zekyushiramEnemigo.ataques = zekyushiram.ataques.slice();
+
 mokepones.push(kyodonquaza, paldiatina, raichu, venustoizard, zapmolcuno, zekyushiram);
+
+
 
 // funcion donde se crea interaciones con los botones de seleccion de mascota y ataques.
 function iniciarJuego() {   
@@ -189,7 +211,6 @@ function iniciarJuego() {
 // llamamos la funcion de llamar la mascota enemigo.
 function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = 'none';
-    // sectionSeleccionarAtaque.style.display = 'flex';
 
     const inputSeleccionado = document.querySelector('input[name="mascota"]:checked');
     if (inputSeleccionado) {
@@ -210,7 +231,6 @@ function seleccionarMascotaJugador() {
     extraerAtaques(mascotaJugador);
     sectionVerMapa.style.display = 'flex';
     iniciarMapa();
-    seleccionarMascotaEnemigo();
 }
 
 function extraerAtaques(mascotaJugador){
@@ -241,6 +261,7 @@ function mostrarAtaques(ataques) {
     botonViento = document.getElementById('boton-viento');
     botonElectrico = document.getElementById('boton-electrico');
     botones = document.querySelectorAll('.BAtaque');
+    secuenciaAtaque();
 }
 
 function secuenciaAtaque() {
@@ -277,9 +298,8 @@ function secuenciaAtaque() {
 }
 
 //Creamos una funcion para poder llamar la mascota enemigo, pero de forma aleatoria y poder mostrarla en el HTML.
-function seleccionarMascotaEnemigo() {
-    let mascotaAleatorio = aleatorio(0, mokepones.length - 1);
-    const mascota = mokepones[mascotaAleatorio];
+function seleccionarMascotaEnemigo(enemigo) {
+    const mascota = enemigo;
 
     // Mostrar nombre e imagen
     spanMascotaEnemigo.innerHTML = `<img src="${mascota.foto}" alt="${mascota.nombre}" class="imagen-mascota">${mascota.nombre}`;
@@ -288,15 +308,24 @@ function seleccionarMascotaEnemigo() {
     vidasEnemigoActual = mascota.vida;
     vidasEnemigo.textContent = vidasEnemigoActual;
 
-    ataquesMokeponEnemigo = mascota.ataques;// lista de ataques de su mascota
-    secuenciaAtaque();
+    ataquesMokeponEnemigo = mascota.ataques.slice();
 }
 
 //Creamos una funcion para hacer el ataque enemigo aleatorio, ademas llamamos la funcion aleatorio.
 // llamos la funcion de combate para poder mostrar si ganamos o perdimos en el HTML.
 function ataqueAleatorioEnemigo(){
+    // Validar primero que el enemigo tenga ataques
+    if (!ataquesMokeponEnemigo || ataquesMokeponEnemigo.length === 0) {
+        console.error("El enemigo no tiene ataques asignados");
+        return;
+    }
     // Elegir un ataque aleatorio del arreglo de ataques de la mascota enemiga
     let ataqueSeleccionado = ataquesMokeponEnemigo[aleatorio(0, ataquesMokeponEnemigo.length - 1)];
+
+    if (!ataqueSeleccionado) {
+        console.error("No se pudo seleccionar un ataque del enemigo");
+        return;
+    }
 
     let tipoAtaque;
     switch (ataqueSeleccionado.nombre) {
@@ -310,6 +339,7 @@ function ataqueAleatorioEnemigo(){
         case '❄️': tipoAtaque = 'HIELO'; break;
         case '🩻': tipoAtaque = 'FANTASMA'; break;
     }
+
     ataqueEnemigo.push(tipoAtaque);
     console.log(ataqueEnemigo);
 
@@ -482,8 +512,6 @@ function sePresionoUnaTecla(event){
 }
 
 function iniciarMapa() {
-    mapa.width = 800;
-    mapa.height = 500;
     mascotaJugadorObjeto = obtenerObjetiMascota(mascotaJugador);
     intervalo = setInterval(pintarCanvas, 50);
 
@@ -515,7 +543,11 @@ function revisarColision(enemigo) {
         return;
     }
         detenerMovimiento();
-        alert('Hay colision ' + enemigo.nombre);
+        clearInterval(intervalo);
+        console.log('Se detecto una colision');
+        sectionSeleccionarAtaque.style.display = 'flex';
+        sectionVerMapa.style.display = 'none';
+        seleccionarMascotaEnemigo(enemigo);
     }
 
 // Ejecuta iniciarJuego() cuando la página termine de cargar por completo.
