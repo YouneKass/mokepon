@@ -2,7 +2,7 @@
 
 body{
     font-family: "Winky Rough", sans-serif;
-    background-image: url('/img/pokemon-battle-background-ipdmxhh8cpdwupop.jpg');
+    background-image: url('/img/fondo-de-pantalla.png');
 }
 
 #seleccionar-mascota{
@@ -13,13 +13,30 @@ body{
 }
 
 .titulo{
-    color: #FDF5AA;
+    color: #CFAB8D;
     font-size: 50px;
 }
 
 .subtitulo{
-    color: #FDF5AA;
+    color: #8C1007;
     font-size: 35px;
+}
+
+.titulo2{
+    color: #CFAB8D;
+    font-size: 50px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.subtitulo2{
+    color: #8C1007;
+    font-size: 35px;
+    background-color: #113F67;
+    margin-top: 0px;
+    border-radius: 20px;
+    padding: 5px;
+    
 }
 
 .tarjetas, .tarjeta-ataque{
@@ -30,22 +47,24 @@ body{
 }
 
 .tarjeta-de-mokepon{
-    width: 250px;
-    height: 250px;
-    background: #58A0C8;
+    width: 180px;
+    height: 230px;
+    background: #D9C4B0;
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
-    border: 2px solid #FDF5AA;
+    border: 3px solid #468A9A;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column-reverse;
     cursor: pointer;
 }
 
 .tarjeta-de-mokepon img{
     width: 150px;
+    height: 150px;
 }
 
 input{
@@ -156,6 +175,14 @@ input:checked + label{
     .titulo{
         margin-top: 65px;
     }
+    #mapa{
+        width: 350px;
+        height: 350px;
+    }
+    .titulo2, .subtitulo2{
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .volver{
@@ -169,4 +196,10 @@ input:checked + label{
     padding: 10px;
     font-size: 20px;
     cursor: pointer;
+}
+
+#ver-mapa{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
