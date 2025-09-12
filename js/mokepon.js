@@ -17,12 +17,12 @@ const contenedorAtaques = document.getElementById('contenedorAtaques');
 const sectionVerMapa = document.getElementById('ver-mapa');
 const mapa = document.getElementById('mapa');
 const reglas = {
-    FUEGO: ["TIERRA", "VIENTO", "ELECTRICO", "ESTELAR"],
+    FUEGO: ["TIERRA", "VIENTO", "ELECTRICO", "ESTELAR", "HIELO"],
     AGUA: ["FUEGO", "ESTELAR", "ELECTRICO"],
     TIERRA: ["AGUA", "METAL", "ELECTRICO"],
     VIENTO: ["TIERRA", "ESTELAR", "HIELO", "FANTASMA"],
     METAL: ["AGUA", "FUEGO", "ELECTRICO", "VIENTO"],
-    ELECTRICO: ["VIENTO", "ESTELAR"],
+    ELECTRICO: ["VIENTO", "ESTELAR", "HIELO"],
     ESTELAR: ["TIERRA", "FANTASMA", "METAL"],
     HIELO: ["AGUA", "TIERRA", "ESTELAR"],
     FANTASMA: ["FUEGO", "AGUA", "TIERRA", "ELECTRICO", "HIELO", "METAL"]
