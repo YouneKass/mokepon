@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOKEPON!</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
   </head>
 
   <body>
@@ -25,10 +25,25 @@
       <h1 class="titulo2">Recorre el mapa con tu mascota</h1>
       <h2 class="subtitulo2">Para moverte dentro del juego, ocupa las flechas: ↑ ↓ → ← </h2>
       <canvas id="mapa"></canvas>
-      <button onmouseup="detenerMovimiento()" onmousedown="moverArriba()">Arriba</button>
-      <button onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()">Izquierda</button>
-      <button onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">Abajo</button>
-      <button onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">Derecha</button>
+      <div class="controles">
+        <button class="btn-arriba"
+          onmousedown="moverArriba()"
+          onmouseup="detenerMovimiento()">▲</button>
+
+        <div class="fila-centro">
+          <button class="btn-izq"
+            onmousedown="moverIzquierda()"
+            onmouseup="detenerMovimiento()">◀</button>
+
+          <button class="btn-der"
+            onmousedown="moverDerecha()"
+            onmouseup="detenerMovimiento()">▶</button>
+        </div>
+
+        <button class="btn-abajo"
+          onmousedown="moverAbajo()"
+          onmouseup="detenerMovimiento()">▼</button>
+      </div>
     </section>
 
     <!-- Section para mostrar los ataques del jugador y del enemigo, también la cantidad de vida que tiene cada uno y cuánta se pierde en cada turno de ataque. -->

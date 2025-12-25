@@ -15,9 +15,10 @@
     "url": "https://github.com/YouneKass/mokepon/issues"
   },
   "homepage": "https://github.com/YouneKass/mokepon#readme",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
-  }
+    "express": "^5.2.1"
+  },
+  "keywords": [],
+  "description": ""
 }

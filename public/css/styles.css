@@ -2,7 +2,7 @@
 
 body{
     font-family: "Winky Rough", sans-serif;
-    background-image: url('/img/fondo-de-pantalla.png');
+    background-image: url('../img/fondo.png');
 }
 
 #seleccionar-mascota{
@@ -202,4 +202,35 @@ input:checked + label{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.controles{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.fila-centro{
+    display: flex;
+    gap: 20px;
+}
+
+.controles button{
+    width: 80px;
+    height: 80px;
+    font-size: 35px;
+    font-family: "Winky Rough", sans-serif;
+    border-radius: 50%;
+    border: 3px solid #FDF5AA;
+    background: #58A0C8;
+    color: white;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.controles button:active{
+    background: #34699A;
+    transform: scale(0.95);
 }
