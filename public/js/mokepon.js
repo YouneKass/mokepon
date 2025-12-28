@@ -70,6 +70,10 @@ mapaBackground.src = './img/background-battle.gif';
 let alturaMapa;
 let anchoMapa = window.innerWidth - 20;
 const anchoMaximoDelMapa = 800;
+const btnArriba = document.querySelector(".btn-arriba");
+const btnAbajo = document.querySelector(".btn-abajo");
+const btnIzq   = document.querySelector(".btn-izq");
+const btnDer   = document.querySelector(".btn-der");
 if (anchoMapa > anchoMaximoDelMapa) {
     anchoMapa = anchoMaximoDelMapa - 20;
 }
@@ -565,22 +569,37 @@ function enviarPosicion(x, y) {
             }
         });
 }
-function moverDerecha() {
+function moverDerecha(e) {
+    if (e) e.preventDefault();
     mascotaJugadorObjeto.velocidadX = 5;
 }
-function moverIzquierda() {
+function moverIzquierda(e) {
+    if (e) e.preventDefault();
     mascotaJugadorObjeto.velocidadX = -5;
 }
-function moverAbajo() {
+function moverAbajo(e) {
+    if (e) e.preventDefault();
     mascotaJugadorObjeto.velocidadY = 5;
 }
-function moverArriba() {
+function moverArriba(e) {
+    if (e) e.preventDefault();
     mascotaJugadorObjeto.velocidadY = -5;
 }
-function detenerMovimiento() {
+function detenerMovimiento(e) {
+    if (e) e.preventDefault();
     mascotaJugadorObjeto.velocidadX = 0;
     mascotaJugadorObjeto.velocidadY = 0;
 }
+function bindTouch(btn, downFn) {
+    btn.addEventListener("touchstart", downFn, { passive: false });
+    btn.addEventListener("touchend", detenerMovimiento);
+}
+
+bindTouch(btnArriba, moverArriba);
+bindTouch(btnAbajo, moverAbajo);
+bindTouch(btnIzq, moverIzquierda);
+bindTouch(btnDer, moverDerecha);
+
 function sePresionoUnaTecla(event) {
     switch (event.key) {
         case 'ArrowUp':
