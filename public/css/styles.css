@@ -227,6 +227,10 @@ input:checked + label{
         height: 70px;
         font-size: 24px;
     }
+
+    canvas {
+        transform: scale(0.9);
+    }
 }
 
 .volver{
@@ -278,3 +282,5 @@ input:checked + label{
     background: #34699A;
     transform: scale(0.95);
 }
+
+

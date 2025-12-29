@@ -6,6 +6,7 @@ app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 const jugadores = [];
+
 class Jugador {
     constructor(id) {
         this.id = id;
@@ -21,11 +22,13 @@ class Jugador {
         this.ataques = ataques;
     }
 }
+
 class Mokepon {
     constructor(nombre) {
         this.nombre = nombre;
     }
 }
+
 app.get("/unirse", (req, res) => {
     const id = `${Math.random()}`;
     const jugador = new Jugador(id);
@@ -33,6 +36,7 @@ app.get("/unirse", (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.send(id);
 });
+
 app.post("/mokepon/:jugadorId", (req, res) => {
     const jugadorId = req.params.jugadorId || "";
     const nombre = req.body.mokepon || "";
@@ -45,6 +49,7 @@ app.post("/mokepon/:jugadorId", (req, res) => {
     console.log(jugadorId);
     res.end();
 });
+
 app.post("/mokepon/:jugadorId/posicion", (req, res) => {
     const jugadorId = req.params.jugadorId || "";
     const x = req.body.x || 0;
